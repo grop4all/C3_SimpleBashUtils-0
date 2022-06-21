@@ -125,12 +125,12 @@ void s21_running(Flags flags, char *mas_with_reg_exp, char **mas_with_files) {
 
 void s21_output_result(Flags flags, char *name_file, char *reg_exp) {
   FILE *file;
-  pcre *pcre;
   if ((file = fopen(name_file, "r")) == NULL) {
     if (!flags.s) {
       printf("s21_grep: %s: No such file or directory\n", name_file);
     }
   } else {
+    pcre *pcre;
     char *str = NULL;
     const char *error;
     int erroffset;
@@ -303,15 +303,15 @@ void check_e_flags(char **argv, char **mas_with_reg_exp, int *i, int *j) {
 }
 
 void check_f_flag(char **argv, char **mas_with_reg_exp, int *i, Flags flags) {
-  int count = 0;
   (*i)++;
   FILE *file;
-  char str[300];
   if ((file = fopen(argv[*i], "r")) == NULL) {
     if (!flags.s) {
       printf("s21_grep: %s: No such file or directory\n", argv[*i]);
     }
   } else {
+    char str[300];
+    int count;
     while (fgets(str, sizeof(str), file)) {
       if (strlen(str) > 1 && str[strlen(str) - 1] == '\n') {
         str[strlen(str) - 1] = '\0';

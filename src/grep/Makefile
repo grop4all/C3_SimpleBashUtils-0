@@ -19,3 +19,4 @@ test: s21_grep
 
 clean:
 	rm -rf *.o
+	rm 0_*.*
